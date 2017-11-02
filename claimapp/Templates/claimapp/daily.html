@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+   <style>
+      body {
+      padding-top: 65px;
+      padding-bottom: 65px;
+      }
+      h4.card-title a {
+      color: black;
+      }
+      li.list-group-item a {
+        color: black;
+      }
+      .dropdown-container {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%; /* Bottom of button */
+      right: 0;
+      margin-left: -100px; /* More to the left */
+    }
+   </style>
+   <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+   </head>
+   <body>
+      <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+         <a class="navbar-brand" href="#">ExtractFacts</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+               <a class="nav-item nav-link" href="{% url 'claimapp:index' %}">Search<span class="sr-only">(current)</span></a>
+               <a class="nav-item nav-link" href="{% url 'claimapp:data' %}">Data</a>
+               <a class="nav-item nav-link active" href="{% url 'claimapp:daily' %}">Daily</a>
+               <div class="dropdown-container">
+               <a class="nav-item dropdown nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorical Pages</a>
+               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'claimapp:staticpage' 'donald-trump' %}">Donald Trump</a>
+                <a class="dropdown-item" href="{% url 'claimapp:staticpage' 'health-care' %}">Health Care</a>
+                <a class="dropdown-item" href="{% url 'claimapp:staticpage' 'tax-policy' %}">Tax Policy</a>
+              </div></div>
+               <a class="nav-item nav-link" href="#">About</a>
+            </div>
+         </div>
+      </nav>
+      <center>
+      <div class="jumbotron">
+         <center>
+            <h1 class="display-5">Your daily scorecards for the past 7 days</h1>
+            <p class="lead">Click on a day to see that day's {{numbertoshow}} most fact-checkable claims.</p>
+      </div>
+      </center>
+      <center>
+         <div class="card" style="width: 90%">
+            <div class="card-body">
+               <h4 class="card-title"><a data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">Today—{{day1title}}</a></h4>
+               <div class="collapse" id="collapseExample1">
+                  <ul class="list-group list-group-flush">
+                     {% for item in day1 %}
+                     <li class="list-group-item" align="left"><a href="{% url 'claimapp:detail' item.claim_id %}">{{item.claim}}</a><br><br><b>{{item.speaker}}</b></li>
+                     {% endfor %}
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </center>
+      <center>
+         <div class="card" style="width: 90%">
+            <div class="card-body">
+               <h4 class="card-title"><a data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">Yesterday—{{day2title}}</a></h4>
+               <div class="collapse" id="collapseExample2">
+                  <ul class="list-group list-group-flush">
+                     {% for item in day2 %}
+                     <li class="list-group-item" align="left"><a href="{% url 'claimapp:detail' item.claim_id %}">{{item.claim}}</a><br><br><b>{{item.speaker}}</b></li>
+                     {% endfor %}
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </center>
+      <center>
+         <div class="card" style="width: 90%">
+            <div class="card-body">
+               <h4 class="card-title"><a data-toggle="collapse" href="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">2 Days Ago—{{day3title}}</a></h4>
+               <div class="collapse" id="collapseExample3">
+                  <ul class="list-group list-group-flush">
+                     {% for item in day3 %}
+                     <li class="list-group-item" align="left"><a href="{% url 'claimapp:detail' item.claim_id %}">{{item.claim}}</a><br><br><b>{{item.speaker}}</b></li>
+                     {% endfor %}
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </center>
+      <center>
+         <div class="card" style="width: 90%">
+            <div class="card-body">
+               <h4 class="card-title"><a data-toggle="collapse" href="#collapseExample4" aria-expanded="false" aria-controls="collapseExample">3 Days Ago—{{day4title}}</a></h4>
+               <div class="collapse" id="collapseExample4">
+                  <ul class="list-group list-group-flush">
+                     {% for item in day4 %}
+                     <li class="list-group-item" align="left"><a href="{% url 'claimapp:detail' item.claim_id %}">{{item.claim}}</a><br><br><b>{{item.speaker}}</b></li>
+                     {% endfor %}
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </center>
+      <center>
+         <div class="card" style="width: 90%">
+            <div class="card-body">
+               <h4 class="card-title"><a data-toggle="collapse" href="#collapseExample5" aria-expanded="false" aria-controls="collapseExample">4 Days Ago—{{day5title}}</a></h4>
+               <div class="collapse" id="collapseExample5">
+                  <ul class="list-group list-group-flush">
+                     {% for item in day5 %}
+                     <li class="list-group-item" align="left"><a href="{% url 'claimapp:detail' item.claim_id %}">{{item.claim}}</a><br><br><b>{{item.speaker}}</b></li>
+                     {% endfor %}
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </center>
+      <center>
+         <div class="card" style="width: 90%">
+            <div class="card-body">
+               <h4 class="card-title"><a data-toggle="collapse" href="#collapseExample6" aria-expanded="false" aria-controls="collapseExample">5 Days Ago—{{day6title}}</a></h4>
+               <div class="collapse" id="collapseExample6">
+                  <ul class="list-group list-group-flush">
+                     {% for item in day6 %}
+                     <li class="list-group-item" align="left"><a href="{% url 'claimapp:detail' item.claim_id %}">{{item.claim}}</a><br><br><b>{{item.speaker}}</b></li>
+                     {% endfor %}
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </center>
+      <center>
+         <div class="card" style="width: 90%">
+            <div class="card-body">
+               <h4 class="card-title"><a data-toggle="collapse" href="#collapseExample7" aria-expanded="false" aria-controls="collapseExample">6 Days Ago—{{day7title}}</a></h4>
+               <div class="collapse" id="collapseExample7">
+                  <ul class="list-group list-group-flush">
+                     {% for item in day7 %}
+                     <li class="list-group-item" align="left"><a href="{% url 'claimapp:detail' item.claim_id %}">{{item.claim}}</a><br><br><b>{{item.speaker}}</b></li>
+                     {% endfor %}
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </center>
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+   </body>
+</html>

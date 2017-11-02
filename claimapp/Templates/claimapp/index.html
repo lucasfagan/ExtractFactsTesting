@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!--<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+<!--new -->
+<link type="text/css" href="css/ui-lightness/jquery-ui-1.9.1.custom.min.css" rel="stylesheet" />
+<script src="js/jquery-1.8.2.js" type="text/javascript"></script>
+<script src="js/jquery-ui-1.9.1.custom.min.js" type="text/javascript"></script>
+<script src="js/i18n/jquery-ui-i18n.min.js" type="text/javascript"></script>
+     <script>
+     $(function(){
+  $.datepicker.setDefaults(
+    $.extend( $.datepicker.regional[ '' ] )
+  );
+  $( '#datepicker' ).datepicker();
+});
+     </script>
+  <style>
+  .dropdown-container {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Bottom of button */
+  right: 0;
+  margin-left: -100px; /* More to the left */
+}
+  </style>
+   </head>
+   <body>
+      <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+         <a class="navbar-brand" href="#">ExtractFacts</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+               <a class="nav-item nav-link active" href="{% url 'claimapp:index' %}">Search<span class="sr-only">(current)</span></a>
+               <a class="nav-item nav-link" href="{% url 'claimapp:data' %}">Data</a>
+               <a class="nav-item nav-link" href="{% url 'claimapp:daily' %}">Daily</a>
+               <div class="dropdown-container">
+               <a class="nav-item dropdown nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorical Pages</a>
+               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'claimapp:staticpage' 'donald-trump' %}">Donald Trump</a>
+                <a class="dropdown-item" href="{% url 'claimapp:staticpage' 'health-care' %}">Health Care</a>
+                <a class="dropdown-item" href="{% url 'claimapp:staticpage' 'tax-policy' %}">Tax Policy</a>
+              </div></div>
+               <a class="nav-item nav-link" href="#">About</a>
+            </div>
+         </div>
+      </nav>
+      <div class="jumbotron">
+         <center>
+            <h1 class="display-3">Search CNN Transcripts</h1>
+            <p class="lead">ExtractFacts uses the ClaimBuster API to deliver the most fact-checkable claims based on your search.</p>
+            <hr class="my-4">
+         </center>
+         <div class="container-fluid">
+            <form method="POST" action="{% url 'claimapp:data' %}">
+               {% csrf_token %}
+               <div class="form-group">
+                  <label class="form-control-label" for="formGroupExampleInput">Search for a person</label>
+                  <input type="text" class="form-control" id="formGroupExampleInput" name="name" placeholder="e.g. Donald Trump">
+               </div>
+               <div class="form-group">
+                  <label class="form-control-label" for="formGroupExampleInput2">...or a date</label>
+                  <input type="text" class="form-control" id="datepicker" name="date" placeholder="mm/dd/yy">
+               </div>
+               <div class="form-group">
+                  <label class="form-control-label" for="formGroupExampleInput2">...or some text</label>
+                  <input type="text" class="form-control" id="formGroupExampleInput2" name="text" placeholder="e.g. Las Vegas shooting">
+               </div>
+               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+         </div>
+      </div>
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+   </body>
+</html>
