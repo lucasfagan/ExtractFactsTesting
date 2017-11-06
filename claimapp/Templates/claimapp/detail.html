@@ -60,6 +60,7 @@
             <p class="lead">Claim: {{ claim.claim }}</p>
             <p class="lead">Date: {{ claim.date }}</p>
             <p class="lead">Claimbuster Score: {{ claim.score }}</p>
+            <a href="{{transcriptlink}}" class="btn btn-outline-danger my-2 my-sm-0" target="_blank">View complete CNN transcript</a><br><br>
             {% if buttontext == "Return to data" %}
             <a href="javascript:history.back()" class="btn btn-outline-dark my-2 my-sm-0">{{buttontext}}</a>
             {% elif buttontext == "Return to daily" %}

@@ -14,7 +14,6 @@ global detailSender
 
 def index(request):
     context={}
-    print("HEY")
     #reset the search values
     global searchname
     global searchdate
@@ -107,7 +106,7 @@ def detail(request, selected_claim):
     claim.speaker=claim.speaker.title()
     if claim.speaker[len(claim.speaker)-1]==" ":
         claim.speaker=claim.speaker[:len(claim.speaker)-1]
-    context={"claim":claim,"buttontext":buttontext}
+    context={"claim":claim,"buttontext":buttontext,"transcriptlink":"http://www.cnn.com/TRANSCRIPTS/"+claim.trans_id+".html"}
     return render(request, 'claimapp/detail.html', context)
 
 def formatdata(data):

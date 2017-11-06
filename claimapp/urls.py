@@ -2,7 +2,7 @@ from django.conf.urls import url
 from . import views
 
 
-app_name = 'albums'
+app_name = 'claimapp'
 urlpatterns=[
     #/music/
     url(r'^index/',views.index, name='index'),
